@@ -1,0 +1,189 @@
+* {
+    color: black;
+    font-size: 19px;
+    
+
+}
+
+h1{
+    font-size: 45px;
+    font-family: 'GFS Neohellenic', sans-serif;
+    color: #ffffff3b;
+    border: solid 2px color black;
+ }
+.h2{
+    font-size: 45PX;
+    font-family:'GFS Neohellenic', sans-serif;
+}
+.grid__container {
+    display: grid;
+    margin: 10px;
+    grid-template-areas:
+      "nav"
+      "header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+  
+  .main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "introduccion imagen";
+      font-family: 'Work Sans', sans-serif; color: black;
+  }
+  
+  .introduccion {
+    grid-area: introduccion;
+  }
+  
+  .main a {
+    grid-area: imagen;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .main img {
+    object-fit: scale-down;
+   height: 600px;
+   width: 600px;
+   margin-right: 15px;
+   justify-self: end ;
+   border: solid 4px;
+   margin-top: 10px;
+  }
+  
+  .introduccion h2,
+  .introduccion p {
+    margin-top: 0;
+  }
+  
+.background__img{
+    background-image: url("labuena.jpg");
+  border: solid 3px color black;
+}
+.titulo{
+    background-size: contain;
+    text-align: center;
+    background-image: url("./logo sparta.png");
+    height: 500px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+
+
+.nav {
+    background: #fff;
+    float: right;
+}
+
+.nav__responsive-ul {
+    display: none;
+}
+
+.nav__li {
+    display: inline-block;
+    padding: 20px;
+    color: #fff;
+
+
+}
+
+.nav__li a {
+    color: black;
+    text-decoration: none;
+
+}
+
+.nav__li i {
+
+    box-sizing: border-box;
+    text-align: right;
+    margin-right: 5px;
+
+
+}
+
+.nav__li:hover>a {
+    color: black;
+}
+
+.nav__li:hover {
+    color: #bbb;
+}
+.accordion-item img{
+    width: 300px;
+    height: 300px;
+ 
+}
+.accordion-item video{
+    width: 450px;
+    height: 450px;
+}
+.staff {
+    display: grid;
+    grid-template-areas: "h2"
+                         "carousel-itm img descripcion";
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .carousel-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .carousel-item img {
+    width: 350px;
+    border-radius: 350px ;  
+  }
+
+.coyote{
+  background-image: url('https://www.teleadhesivo.com/es/img/as1369-jpg/folder/products-listado-merchanthover/pegatinas-coches-motos-coyote-estampado-en-la-pared.jpg');
+}
+
+@media only screen and (max-width: 500px) {
+    .nav {
+        height: 37px;
+        width: 100%;
+    }
+
+    .nav__ul {
+        display: none;
+    }
+
+    .nav__responsive-ul {
+        display: block;
+        position: relative;
+        width: 100%;
+        margin-top: 37px;
+        padding-top: 5px;
+        background: none;
+        float: left;
+
+
+    }
+
+    .nav__li-container {
+        position: relative;
+        transition: all 1s;
+        z-index: 1;
+        background: white;
+
+    }
+
+    .nav__responsive-button {
+        display: block;
+        font-size: 24px;
+        margin-right: 10px;
+        float: right;
+
+
+
+    }
+
+    .nav__responsive-li {
+        margin: 10px 0;
+    }

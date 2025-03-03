@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Usuario - Sparta Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --blanco: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+        }
+
+        .profile-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                       url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg');
+            background-size: cover;
+            padding: 4rem 0;
+            border-bottom: 3px solid var(--verde-militar);
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border: 3px solid var(--verde-militar);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--verde-militar);
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            padding: 0.5rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-picture:hover .upload-overlay {
+            opacity: 1;
+        }
+
+        .certificado-card {
+            background: var(--gris-oscuro);
+            border: 2px solid var(--verde-militar);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .certificado-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .progress-bar-sparta {
+            background-color: var(--verde-militar);
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .badge-sparta {
+            background-color: var(--verde-militar);
+            color: var(--blanco);
+        }
+
+        .sidebar {
+            border-right: 2px solid var(--verde-militar);
+            height: calc(100vh - 200px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-sparta fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-sparta d-flex align-items-center" href="index.html">
+                <img src="" alt="Sparta Academy">
+                <span class="d-none d-md-block">Sparta I.A.T</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="app.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta active" href="cursos.html">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="foro.html">Foro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="perfil.html">Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header del Perfil -->
+    <header class="profile-header">
+        <div class="container text-center">
+            <div class="profile-picture mx-auto mb-3">
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Foto de perfil">
+                <div class="upload-overlay">
+                    <small><i class="bi bi-camera"></i> Cambiar foto</small>
+                </div>
+            </div>
+            <h2>Juan Pérez</h2>
+            <p class="text-muted">Miembro desde: Enero 2024</p>
+            <button class="btn btn-outline-verde-militar">
+                <i class="bi bi-pencil"></i> Editar Perfil
+            </button>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 p-4 sidebar">
+                <div class="mb-4">
+                    <h4><i class="bi bi-speedometer2 me-2"></i>Progreso General</h4>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-sparta" style="width: 75%">75%</div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4><i class="bi bi-trophy me-2"></i>Logros</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge badge-sparta"><i class="bi bi-star"></i> Novato</span>
+                        <span class="badge badge-sparta"><i class="bi bi-shield-check"></i> Seguridad</span>
+                        <span class="badge badge-sparta"><i class="bi bi-clock-history"></i> 100 horas</span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4><i class="bi bi-journal-check me-2"></i>Cursos Activos</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>Tiro Defensivo</li>
+                        <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>Primeros Auxilios</li>
+                        <li class="mb-2"><i class="bi bi-arrow-right-circle me-2"></i>Legislación</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contenido Principal -->
+            <div class="col-md-9 p-4">
+                <!-- Sección de Certificados -->
+                <section class="mb-5">
+                    <h3 class="mb-4"><i class="bi bi-award"></i> Certificados Obtenidos</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="certificado-card p-3 text-center">
+                                <img src="curso tiro defensivo 2-a s1.jpeg" 
+                                     class="img-fluid mb-3" alt="Certificado 1">
+                                <h5>Certificado Básico</h5>
+                                <small class="text-muted">Emitido: 15/03/2024</small>
+                                <button class="btn btn-link text-verde-militar mt-2">
+                                    <i class="bi bi-download"></i> Descargar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="certificado-card p-3 text-center">
+                                <img src="curso tiro defensivo 2-3.jpeg" 
+                                     class="img-fluid mb-3" alt="Certificado 2">
+                                <h5>Seguridad Avanzada</h5>
+                                <small class="text-muted">Emitido: 01/04/2024</small>
+                                <button class="btn btn-link text-verde-militar mt-2">
+                                    <i class="bi bi-download"></i> Descargar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="certificado-card p-3 text-center">
+                                <img src="curso tiro defensivo 2-2.jpeg" 
+                                     class="img-fluid mb-3" alt="Certificado 3">
+                                <h5>Instructor Certificado</h5>
+                                <small class="text-muted">Emitido: 22/05/2024</small>
+                                <button class="btn btn-link text-verde-militar mt-2">
+                                    <i class="bi bi-download"></i> Descargar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección de Estadísticas -->
+                <section class="mb-5">
+                    <h3 class="mb-4"><i class="bi bi-bar-chart"></i> Estadísticas</h3>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="p-4 bg-gris-oscuro rounded">
+                                <h5><i class="bi bi-clock-history"></i> Horas de Entrenamiento</h5>
+                                <div class="display-4">142</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-4 bg-gris-oscuro rounded">
+                                <h5><i class="bi bi-shield-check"></i> Cursos Completados</h5>
+                                <div class="display-4">8</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección de Comunidad -->
+                <section>
+                    <h3 class="mb-4"><i class="bi bi-people"></i> Actividad Reciente</h3>
+                    <div class="list-group">
+                        <div class="list-group-item bg-gris-oscuro mb-2">
+                            <div class="d-flex align-items-center">
+                                <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" 
+                                     class="rounded-circle me-3" width="40" alt="Usuario">
+                                <div>
+                                    <strong>Maria García</strong> te ha enviado un mensaje
+                                    <small class="d-block text-muted">Hace 2 horas</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Más actividades... -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simular subida de foto de perfil
+            const profilePicture = document.querySelector('.profile-picture');
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.style.display = 'none';
+
+            profilePicture.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePicture.querySelector('img').src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparta Academy - Entrenamiento Táctico Profesional</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --blanco: #FFFFFF;
+        }
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            font-family: 'Arial', sans-serif; /* Fuente por defecto más legible */
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url("fotoDeFondo.jpeg"); /* Reemplaza "ARMAFONDO.jpg" con la URL de tu imagen HERO */
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex; /* Añadido para centrar verticalmente el contenido */
+            align-items: center; /* Añadido para centrar verticalmente el contenido */
+            text-align: center; /* Centrar texto en hero section */
+            padding: 2rem; /* Añadido padding para mejor espacio alrededor del texto */
+        }
+        .hero-content {
+            position: relative; /* Asegurar que el contenido esté sobre el overlay si lo hay */
+            z-index: 1;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.9); /* Sombra para resaltar el texto */
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+        }
+        .btn-sparta {
+            background-color: var(--verde-militar);
+            color: var(--blanco);
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none; /* Eliminar borde por defecto de botones */
+        }
+        .btn-sparta:hover {
+            background-color: #6B8E23;
+            transform: scale(1.05);
+        }
+        .card-curso {
+            background: var(--gris-oscuro);
+            border: 2px solid var(--verde-militar);
+            border-radius: 10px; /* Añadido border-radius a las tarjetas de curso */
+            overflow: hidden; /* Para bordes redondeados en imágenes si se usan */
+            transition: all 0.3s;
+        }
+        .card-curso:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 15px var(--verde-militar);
+        }
+        .director-card {
+            border: 3px solid var(--verde-militar);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .section-title {
+            font-size: 2.8rem; /* Título de sección más grande */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #ddd; /* Subtítulo más claro */
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .feature-card {
+            background-color: #1a1a1a; /* Fondo sutil para tarjetas de características */
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #333; /* Borde sutil para tarjetas de características */
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--verde-militar); /* Icono de característica en verde militar */
+            margin-bottom: 1.5rem;
+        }
+        .testimonial-card {
+            background-color: var(--gris-oscuro);
+            border: 1px solid var(--verde-militar);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            color: #eee; /* Texto de testimonio más claro */
+        }
+        .testimonial-card blockquote {
+            font-size: 1.1rem;
+            font-style: italic;
+            border-left: none; /* Eliminar barra lateral de blockquote */
+            padding-left: 0; /* Ajustar padding de blockquote */
+        }
+        .testimonial-author {
+            font-weight: bold;
+            margin-top: 1rem;
+            color: var(--blanco); /* Autor del testimonio en blanco */
+        }
+        .video-section {
+            background-color: #111; /* Sección de video ligeramente más clara */
+            padding: 4rem 0;
+            text-align: center; /* Centrar video y título */
+        }
+        .video-section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--blanco);
+            margin-bottom: 2rem;
+        }
+        .video-container {
+            border-radius: 10px; /* Bordes redondeados para el video */
+            overflow: hidden; /* Asegurar bordes redondeados */
+            box-shadow: 0 0 20px rgba(0,0,0,0.7); /* Sombra para el video */
+            max-width: 800px; /* Ancho máximo del video */
+            margin: 0 auto; /* Centrar el video */
+        }
+        .price-section {
+            padding: 5rem 0;
+            text-align: center; /* Centrar contenido de la sección de precios */
+        }
+        .price-section-title {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--blanco);
+            margin-bottom: 3rem;
+        }
+        .price-card {
+            background-color: var(--gris-oscuro);
+            border: 2px solid var(--verde-militar);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .price-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--verde-militar);
+        }
+        .price-value {
+            font-size: 3rem;
+            font-weight: bolder;
+            color: var(--blanco);
+            margin-bottom: 1.5rem;
+        }
+        .price-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        .price-features li {
+            margin-bottom: 0.75rem;
+            color: #ccc; /* Características del precio en color claro */
+        }
+        .footer-sparta {
+            background-color: #000;
+            color: #888;
+            padding: 2rem 0;
+            border-top: 1px solid #222;
+            text-align: center;
+            font-size: 0.9rem; /* Fuente más pequeña en el footer */
+        }
+        .footer-sparta a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-sparta a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo sparta.ico" alt="Logo Sparta" height="50"> </a>
+            <div class="navbar-nav">
+                <a class="nav-link btn btn-sparta" href="login.html">Ingresar</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Entrenamiento Táctico Profesional</h1>
+            <p class="hero-subtitle">Domina las habilidades necesarias para protegerte y destacar en el mundo táctico.</p>
+            <a href="#cursos-destacados" class="btn btn-sparta">Ver Programas</a>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row director-card bg-black">
+                <div class="col-md-6 p-0">
+                    <img src="MIGUEL.jpeg"
+                         class="img-fluid h-100" alt="Miguel - Director"> </div>
+                         <div class="col-md-6 p-5">
+                            <h2 class="mb-4">Miguel Ghigliotti</h2>
+                            <h4 class="mb-4" style="color: var(--verde-militar);">Director y Entrenador Jefe</h4>
+                            <div class="mb-4">
+                                <span class="badge" style="background-color: var(--verde-militar);">Instructor de Tiro Certificado Internacionalmente</span>
+                                <span class="badge" style="background-color: var(--verde-militar);">Experto en Tácticas Operacionales</span>
+                            </div>
+                            <p class="lead"> Miguel Ghigliotti posee una trayectoria de entrenamiento de alto nivel, incluyendo experiencia con:</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-3"><i class="bi bi-check2-circle me-2 text-success"></i><span class="fw-bold">+500 Civiles Certificados</span> en Defensa Personal y Tiro Táctico</li>
+                                <li class="mb-3"><i class="bi bi-check2-circle me-2 text-success"></i>Diversas <span class="fw-bold">Agencias de Seguridad Federales</span> en Argentina y Latinoamérica</li>
+                                <li class="mb-3"><i class="bi bi-check2-circle me-2 text-success"></i>Numerosos <span class="fw-bold">Equipos de Seguridad Privada</span> y Protección Ejecutiva</li>
+                            </ul>
+                            <blockquote class="blockquote mt-4">
+                                <p class="font-italic">"En Sparta I.A.T, forjamos más que tiradores; cultivamos líderes capaces de actuar con precisión y determinación en los momentos críticos."</p>
+                                <footer class="blockquote-footer">Miguel Ghigliotti, <cite title="Source Title">Director y Entrenador Jefe</cite></footer>
+                            </blockquote>
+                        </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">¿Por Qué Elegir Sparta Academy?</h2>
+            <p class="section-subtitle">Descubre las ventajas que hacen de Sparta IAT la mejor opción para tu entrenamiento táctico.</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-person-fill-check feature-icon"></i>
+                        <h3 class="feature-title-card">Instructores de Élite</h3>
+                        <p class="feature-text">Aprende de ex-miembros de fuerzas especiales y expertos en seguridad con años de experiencia real.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-gear-fill feature-icon"></i>
+                        <h3 class="feature-title-card">Programas Integrales</h3>
+                        <p class="feature-text">Desde principiantes hasta avanzados, nuestros programas cubren todas las áreas del entrenamiento táctico.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-shield-fill-check feature-icon"></i>
+                        <h3 class="feature-title-card">Certificación Profesional</h3>
+                        <p class="feature-text">Obtén certificaciones reconocidas que validan tus habilidades y mejoran tu perfil profesional en seguridad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5" id="cursos-destacados">
+        <div class="container">
+            <h2 class="section-title">Nuestros Programas Destacados</h2>
+            <p class="section-subtitle">Explora algunos de nuestros programas más populares y comienza tu camino hoy.</p>
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card card-curso h-100">
+                        <img src="curso tiro defensivo 1-0.jpeg"
+                             class="card-img-top" alt="Tiro Básico"> <div class="card-body">
+                            <h4>Tiro Básico con Pistola</h4>
+                            <p class="text-success fw-bold">$34.999</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="badge" style="background-color: var(--verde-militar);">20 horas</span>
+                                <span class="badge" style="background-color: var(--verde-militar);">Nivel Inicial</span>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Seguridad fundamental</li>
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Mantenimiento básico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-curso h-100">
+                        <img src="curso tiro defensivo 1-1.jpeg"
+                             class="card-img-top" alt="Defensa Táctica"> <div class="card-body">
+                            <h4>Defensa Táctica Avanzada</h4>
+                            <p class="text-success fw-bold">$54.999</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="badge" style="background-color: var(--verde-militar);">40 horas</span>
+                                <span class="badge" style="background-color: var(--verde-militar);">Nivel Intermedio</span>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Movimiento en equipo</li>
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Escenarios realistas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-curso h-100">
+                        <img src="curso tiro defensivo 1-2.jpeg"
+                             class="card-img-top" alt="Francotirador"> <div class="card-body">
+                            <h4>Tiro de Precisión</h4>
+                            <p class="text-success fw-bold">$89.999</p>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="badge" style="background-color: var(--verde-militar);">60 horas</span>
+                                <span class="badge" style="background-color: var(--verde-militar);">Nivel Avanzado</span>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Balística avanzada</li>
+                                <li><i class="bi bi-check2 me-2 text-success"></i>Camuflaje profesional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <section class="py-5 bg-black">
+        <div class="container">
+            <h2 class="section-title text-white">Testimonios de Alumnos</h2>
+            <p class="section-subtitle text-white">Descubre lo que dicen nuestros alumnos sobre su experiencia en Sparta Academy.</p>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <blockquote class="blockquote">
+                            <p>"El entrenamiento en Sparta IAT superó mis expectativas. Los instructores son excepcionales y los cursos muy prácticos. ¡Totalmente recomendado!"</p>
+                        </blockquote>
+                        <p class="testimonial-author">- Juan Pérez, Agente de Seguridad</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card">
+                        <blockquote class="blockquote">
+                            <p>"Gracias a Sparta IAT, he mejorado significativamente mis habilidades de tiro y mi confianza en situaciones de alta presión. ¡Excelente academia!"</p>
+                        </blockquote>
+                        <p class="testimonial-author">- María Gómez, Oficial de Policía</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 video-section">
+        <h2 class="video-section-title">Nosotros</h2>
+        <div class="video-container ratio ratio-16x9">
+            <iframe src="videoplayback.mp4" 
+                    title="Video Promocional de Sparta Academy"
+                    allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section class="py-5 price-section">
+        <div class="container">
+            <h2 class="price-section-title">Planes de Suscripción</h2>
+            <p class="section-subtitle">Elige el plan que mejor se adapte a tus necesidades de entrenamiento táctico.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="price-card">
+                        <h3 class="mb-3">Suscripción Anual Premium</h3>
+                        <p class="price-value">$999 USD</p>
+                        <ul class="price-features">
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Acceso a todos los cursos online</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Clases en vivo exclusivas</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Certificación digital avanzada</li>
+                            <li><i class="bi bi-check-circle text-success me-2"></i>Soporte personalizado 24/7</li>
+                        </ul>
+                        <a href="#" class="btn btn-sparta btn-lg">Suscribirme Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer-sparta">
+        <div class="container">
+            <p>&copy; 2023 Sparta Academy. Todos los derechos reservados.</p>
+            <p>
+                <a href="#">Términos y Condiciones</a> | <a href="#">Política de Privacidad</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

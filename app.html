@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparta Academy - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --gris-medio: #1A1A1A;
+            --blanco: #FFFFFF;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Estilo Sparta */
+        .navbar-sparta {
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 60%, transparent);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--verde-militar);
+        }
+
+        .navbar-brand-sparta img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .nav-link-sparta {
+            color: var(--blanco) !important;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-sparta:hover,
+        .nav-link-sparta.active {
+            color: var(--verde-militar) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link-sparta::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-militar);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link-sparta:hover::after {
+            width: 100%;
+        }
+
+        /* Carrusel de Cursos Mejorado */
+        .carousel-section {
+            padding: 2rem 4%;
+        }
+
+        .carousel-title {
+            color: var(--blanco);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--verde-militar);
+        }
+
+        .carousel-inner-sparta {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 1rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel-inner-sparta::-webkit-scrollbar {
+            display: none;
+        }
+
+        .course-card-sparta {
+            flex: 0 0 280px;
+            margin: 0 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: transform 0.3s ease;
+            position: relative;
+            background: var(--gris-medio);
+            box-shadow: var(--sombra);
+        }
+
+        .course-card-sparta:hover {
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .course-card-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--verde-militar);
+        }
+
+        .course-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.9));
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .course-card-badge {
+            background: var(--verde-militar);
+            color: var(--blanco);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+        }
+
+        .course-card-title {
+            font-size: 1.1rem;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-sparta {
+                padding: 1rem;
+            }
+            
+            .course-card-sparta {
+                flex: 0 0 220px;
+                margin: 0 0.5rem;
+            }
+            
+            .course-card-image {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Mejorado -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-sparta fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-sparta d-flex align-items-center" href="#">
+                <img src="logo sparta.jpeg" alt="Sparta Academy">
+                <span class="d-none d-md-block">Sparta I.A.T</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta active" href="app.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="cursos.html">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="foro.html">Foro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="perfil.html">Perfil</a>
+                    </li>   </li>
+                    <li class="nav-item">
+                        <a  class="nav-link nav-link-sparta" button="cerrar" href="INICIO.HTML">cerrar sesion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="pt-5">
+        <!-- Sección Cursos Destacados -->
+        <section class="carousel-section">
+            <h2 class="carousel-title">Home Defense</h2>
+            <div class="carousel-inner-sparta">
+                
+                <!-- Curso 1 -->
+                <a href="muestra.html"> <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Tiro Defensivo">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Nuevo</span>
+                        <h3 class="course-card-title">Tácticas Defensivas Avanzadas</h3>
+                    </div>
+                </div></a>
+
+                <!-- Curso 2 -->
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-2.jpeg" class="course-card-image" alt="Tiro de Precisión">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">40 horas</span>
+                        <h3 class="course-card-title">Francotirador Profesional</h3>
+                    </div>
+                </div>
+
+                <!-- Curso 3 -->
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Aspectos Legales">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Certificación</span>
+                        <h3 class="course-card-title">Marco Legal Argentino</h3>
+                    </div>
+                </div>
+
+                <!-- Más cursos... -->
+            </div>
+        </section>
+
+        <!-- Sección Cursos Populares -->
+        <section class="carousel-section">
+            <h2 class="carousel-title">COMBAT PISTOL</h2>
+            <div class="carousel-inner-sparta">
+                
+                <!-- Curso 1 -->
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-3.jpeg" class="course-card-image" alt="Combate Urbano">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Mejor Valorado</span>
+                        <h3 class="course-card-title">Tácticas de Combate Urbano</h3>
+                    </div>
+                </div>
+
+                <!-- Curso 2 -->
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Protección Ejecutiva">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">VIP</span>
+                        <h3 class="course-card-title">Protección Ejecutiva</h3>
+                    </div>
+                </div>
+
+                <!-- Más cursos... -->
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.course-card-sparta');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    cards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                });
+                
+                card.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

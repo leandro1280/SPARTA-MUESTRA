@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los Cursos - Sparta Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --gris-medio: #1A1A1A;
+            --blanco: #FFFFFF;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Estilo Sparta -  REUTILIZADO  */
+        .navbar-sparta {
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 60%, transparent);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--verde-militar);
+        }
+
+        .navbar-brand-sparta img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .nav-link-sparta {
+            color: var(--blanco) !important;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-sparta:hover,
+        .nav-link-sparta.active {
+            color: var(--verde-militar) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link-sparta::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-militar);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link-sparta:hover::after {
+            width: 100%;
+        }
+
+        /* Sección Carrusel de Cursos - REUTILIZADO y ADAPTADO */
+        .carousel-section {
+            padding: 2rem 4%;
+        }
+
+        .carousel-title {
+            color: var(--blanco);
+            font-size: 1.7rem; /* Título de categoría un poco más grande */
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--verde-militar);
+        }
+
+        .carousel-inner-sparta {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 1rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel-inner-sparta::-webkit-scrollbar {
+            display: none;
+        }
+
+        .course-card-sparta {
+            flex: 0 0 220px; /* Cartas un poco más pequeñas que en el dashboard */
+            margin: 0 0.7rem; /* Menos margen horizontal entre cartas */
+            border-radius: 8px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: transform 0.3s ease;
+            position: relative;
+            background: var(--gris-medio);
+            box-shadow: var(--sombra);
+            cursor: pointer; /* Cursor de "mano" para indicar que son clickeables */
+        }
+
+        .course-card-sparta:hover {
+            transform: scale(1.08); /* Menos "zoom" al hacer hover que en el dashboard */
+            z-index: 2;
+        }
+
+        .course-card-image {
+            width: 100%;
+            height: 120px; /* Imágenes de carta más pequeñas */
+            object-fit: cover;
+            border-bottom: 2px solid var(--verde-militar);
+        }
+
+        .course-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.9));
+            padding: 0.8rem; /* Padding del overlay un poco menor */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .course-card-badge {
+            background: var(--verde-militar);
+            color: var(--blanco);
+            padding: 0.2rem 0.6rem; /* Badge más pequeño */
+            border-radius: 20px;
+            font-size: 0.7rem; /* Fuente del badge más pequeña */
+            margin-bottom: 0.3rem; /* Margen inferior del badge menor */
+            align-self: flex-start;
+        }
+
+        .course-card-title {
+            font-size: 1rem; /* Título del curso más pequeño */
+            margin: 0;
+            line-height: 1.2; /* Interlineado del título menor */
+        }
+
+        @media (max-width: 768px) {
+            .navbar-sparta {
+                padding: 1rem;
+            }
+
+            .carousel-section {
+                padding: 1.5rem 2%; /* Menos padding horizontal en móvil */
+            }
+
+            .course-card-sparta {
+                flex: 0 0 180px; /* Cartas aún más pequeñas en móvil */
+                margin: 0 0.4rem; /* Menos margen horizontal en móvil */
+            }
+
+            .course-card-image {
+                height: 100px; /* Imágenes de carta aún más pequeñas en móvil */
+            }
+
+            .carousel-title {
+                font-size: 1.5rem; /* Título de categoría un poco más pequeño en móvil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-sparta fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-sparta d-flex align-items-center" href="index.html">
+                <img src="logo sparta.jpeg" alt="Sparta Academy">
+                <span class="d-none d-md-block">Sparta I.A.T</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="app.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta active" href="cursos.html">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="foro.html">Foro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="perfil.html">Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-5">
+        <section class="carousel-section">
+            <h2 class="carousel-title">Home Defense</h2>
+            <div class="carousel-inner-sparta">
+
+                <a href="muestra.html">
+                    <div class="course-card-sparta">
+                        <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Tiro Defensivo">
+                        <div class="course-card-overlay">
+                            <span class="course-card-badge">Nuevo</span>
+                            <h3 class="course-card-title">Tácticas Defensivas Avanzadas</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-2.jpeg" class="course-card-image" alt="Tiro de Precisión">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">40 horas</span>
+                        <h3 class="course-card-title">Francotirador Profesional</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Aspectos Legales">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Certificación</span>
+                        <h3 class="course-card-title">Marco Legal Argentino</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-3.jpeg" class="course-card-image" alt="Combate Urbano">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Mejor Valorado</span>
+                        <h3 class="course-card-title">Tácticas de Combate Urbano</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 5">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Recomendado</span>
+                        <h3 class="course-card-title">Curso Ejemplo 5</h3>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2 class="carousel-title">Combate con Pistola</h2>
+            <div class="carousel-inner-sparta">
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-3.jpeg" class="course-card-image" alt="Combate Urbano">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Mejor Valorado</span>
+                        <h3 class="course-card-title">Tácticas de Combate Urbano</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Protección Ejecutiva">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">VIP</span>
+                        <h3 class="course-card-title">Protección Ejecutiva</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 5">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Recomendado</span>
+                        <h3 class="course-card-title">Curso Ejemplo 5</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-2.jpeg" class="course-card-image" alt="Tiro de Precisión">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">40 horas</span>
+                        <h3 class="course-card-title">Francotirador Profesional</h3>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2 class="carousel-title">Tiro Deportivo</h2>
+            <div class="carousel-inner-sparta">
+
+                 <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 1">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Popular</span>
+                        <h3 class="course-card-title">Curso Ejemplo 1</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-2.jpeg" class="course-card-image" alt="Curso Ejemplo 2">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Nuevo</span>
+                        <h3 class="course-card-title">Curso Ejemplo 2</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Curso Ejemplo 3">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Certificado</span>
+                        <h3 class="course-card-title">Curso Ejemplo 3</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-3.jpeg" class="course-card-image" alt="Curso Ejemplo 4">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Destacado</span>
+                        <h3 class="course-card-title">Curso Ejemplo 4</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 5">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Recomendado</span>
+                        <h3 class="course-card-title">Curso Ejemplo 5</h3>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <h2 class="carousel-title">Cursos de Legislación</h2>
+            <div class="carousel-inner-sparta">
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 2-2.jpeg" class="course-card-image" alt="Aspectos Legales">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Certificación</span>
+                        <h3 class="course-card-title">Marco Legal Argentino</h3>
+                    </div>
+                </div>
+
+                 <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 1">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Popular</span>
+                        <h3 class="course-card-title">Curso Ejemplo 1</h3>
+                    </div>
+                </div>
+
+                <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-2.jpeg" class="course-card-image" alt="Curso Ejemplo 2">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Nuevo</span>
+                        <h3 class="course-card-title">Curso Ejemplo 2</h3>
+                    </div>
+                </div>
+
+                 <div class="course-card-sparta">
+                    <img src="curso tiro defensivo 1-1.jpeg" class="course-card-image" alt="Curso Ejemplo 1">
+                    <div class="course-card-overlay">
+                        <span class="course-card-badge">Popular</span>
+                        <h3 class="course-card-title">Curso Ejemplo 1</h3>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.course-card-sparta');
+
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    cards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                });
+
+                card.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

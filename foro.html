@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro - SPARTA I.A.T</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --gris-medio: #1A1A1A;
+            --blanco: #FFFFFF;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Estilo Sparta - REUTILIZADO */
+        .navbar-sparta {
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 60%, transparent);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--verde-militar);
+        }
+
+        .navbar-brand-sparta img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .nav-link-sparta {
+            color: var(--blanco) !important;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link-sparta:hover,
+        .nav-link-sparta.active {
+            color: var(--verde-militar) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link-sparta::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--verde-militar);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link-sparta:hover::after {
+            width: 100%;
+        }
+
+        /* Estilos para la Página del Foro */
+        .forum-page {
+            padding-top: 6rem; /* Ajuste para el navbar fijo */
+            padding-bottom: 3rem;
+        }
+
+        .forum-header {
+            background: var(--gris-medio);
+            border-bottom: 2px solid var(--verde-militar);
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .forum-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .forum-description {
+            color: var(--blanco); /* Mismo color que el texto general */
+            font-size: 1.1rem;
+        }
+
+        .forum-content {
+            display: flex;
+            gap: 2rem; /* Espacio entre la sección principal y la sidebar */
+            padding: 0 4%;
+        }
+
+        .forum-posts-section {
+            flex: 1; /* La sección principal de publicaciones ocupa el espacio restante */
+        }
+
+        .forum-sidebar {
+            width: 300px; /* Ancho fijo para la sidebar */
+        }
+
+        .sidebar-section {
+            background-color: var(--gris-medio);
+            border: 1px solid var(--verde-militar);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            box-shadow: var(--sombra);
+        }
+
+        .sidebar-title {
+            color: var(--verde-militar);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--verde-militar);
+            padding-bottom: 0.5rem;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar-list-item {
+            margin-bottom: 0.7rem;
+        }
+
+        .sidebar-list-link {
+            color: var(--blanco);
+            text-decoration: none;
+            display: block; /* Para que ocupe todo el ancho y sea clickable */
+            transition: color 0.2s ease;
+        }
+
+        .sidebar-list-link:hover {
+            color: var(--verde-militar);
+        }
+
+
+        .forum-post {
+            background-color: var(--gris-medio);
+            border: 1px solid var(--verde-militar);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: var(--sombra);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .forum-post:hover {
+            transform: scale(1.02);
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--verde-militar);
+        }
+
+        .post-author {
+            font-size: 0.9rem;
+            color: var(--blanco); /* Mismo color que el texto general */
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content {
+            color: var(--blanco); /* Mismo color que el texto general */
+            line-height: 1.6;
+            margin-bottom: 1rem; /* Espacio debajo del texto para las imágenes */
+        }
+
+        .post-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem; /* Espacio entre imágenes */
+            margin-top: 0.5rem; /* Espacio superior para separar de post-content si es necesario */
+        }
+
+        .post-image {
+            max-width: 150px; /* Ancho máximo de las imágenes en el foro */
+            height: auto;
+            border: 1px solid var(--verde-militar);
+            border-radius: 4px;
+            box-shadow: var(--sombra);
+        }
+
+        .post-footer {
+            margin-top: 1.5rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--verde-militar);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--blanco); /* Mismo color que el texto general */
+        }
+
+        .post-date {
+            color: var(--blanco); /* Mismo color que el texto general */
+        }
+
+        .post-actions a {
+            color: var(--verde-militar);
+            margin-left: 1rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .post-actions a:hover {
+            color: var(--blanco);
+        }
+
+        .add-image-placeholder {
+            border: 2px dashed var(--verde-militar);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            color: var(--blanco);
+            margin-top: 1rem;
+            cursor: pointer; /* Indica que es interactivo (simulación de click para subir imagen) */
+        }
+
+        .add-image-placeholder:hover {
+            background-color: var(--gris-medio); /* Ligeramente más claro al hacer hover */
+        }
+
+        /* Estilos para la sección de comentarios */
+        .post-comments-section {
+            margin-top: 2rem;
+            border-top: 2px solid var(--verde-militar);
+            padding-top: 1.5rem;
+        }
+
+        .comment {
+            background-color: var(--gris-medio);
+            border: 1px solid var(--verde-militar);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--sombra);
+        }
+
+        .comment-author {
+            font-size: 0.9rem;
+            color: var(--verde-militar);
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+
+        .comment-content {
+            color: var(--blanco);
+            line-height: 1.5;
+        }
+
+        .comment-form {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--verde-militar);
+        }
+
+        .comment-form textarea {
+            background-color: var(--gris-medio);
+            color: var(--blanco);
+            border: 1px solid var(--verde-militar);
+            border-radius: 4px;
+            padding: 0.8rem;
+            width: 100%;
+            resize: vertical; /* Permite redimensionar verticalmente */
+            margin-bottom: 0.8rem;
+        }
+
+        .comment-form button {
+            background-color: var(--verde-militar);
+            color: var(--blanco);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .comment-form button:hover {
+            background-color: #6B8E23; /* Verde militar un poco más claro al hover */
+        }
+
+
+        @media (max-width: 768px) {
+            .forum-header {
+                padding: 2rem 4%;
+            }
+
+            .forum-title {
+                font-size: 2rem;
+            }
+
+            .forum-description {
+                font-size: 1rem;
+            }
+
+            .forum-content {
+                flex-direction: column; /* Apilar verticalmente en móvil */
+                padding: 0 2%;
+                gap: 1.5rem;
+            }
+
+            .forum-sidebar {
+                width: 100%; /* Sidebar ocupa todo el ancho en móvil */
+            }
+
+
+            .forum-posts-section {
+                padding: 0; /* Eliminar padding horizontal en móvil */
+            }
+
+            .forum-post {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .post-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-sparta fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-sparta d-flex align-items-center" href="index.html">
+                <img src="logo sparta.jpeg" alt="Sparta Academy">
+                <span class="d-none d-md-block">SPARTA I.A.T</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="cursos.html">Cursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta active" href="#">Foro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-sparta" href="perfil.html">Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="forum-page pt-5">
+        <header class="forum-header">
+            <div class="container">
+                <h1 class="forum-title">Foro de SPARTA I.A.T</h1>
+                <p class="forum-description">Comparte experiencias, preguntas y debate sobre entrenamiento táctico y seguridad.</p>
+            </div>
+        </header>
+
+        <div class="forum-content container">
+            <section class="forum-posts-section">
+
+
+                <div class="forum-post">
+                    <h3 class="post-title">¿Qué curso de defensa personal recomiendan para principiantes?</h3>
+                    <p class="post-author">Publicado por: <span class="fw-bold">UsuarioTáctico</span></p>
+                    <p class="post-content">
+                        Hola a todos, estoy interesado en comenzar a entrenar defensa personal, pero no tengo experiencia previa.  ¿Qué curso de SPARTA I.A.T. me recomendarían para empezar?  Agradezco sus sugerencias!
+
+                        <div class="add-image-placeholder" onclick="alert('Funcionalidad de subida de imágenes no implementada en este prototipo estático. En un sitio web real, aquí se abriría un selector de archivos.');">
+                            <i class="bi bi-image-fill"></i>  Haz clic aquí para añadir imágenes (Simulado)
+                        </div>
+                    </p>
+                    <div class="post-footer">
+                        <span class="post-date">Publicado: 15 de Marzo, 2025</span>
+                        <div class="post-actions">
+                            <a href="#"><i class="bi bi-reply-fill"></i> Responder</a>
+                            <a href="#"><i class="bi bi-heart-fill"></i> Me gusta</a>
+                        </div>
+                    </div>
+
+                    <section class="post-comments-section">
+                        <h4>Comentarios:</h4>
+
+                        <div class="comment">
+                            <p class="comment-author">InstructorSparta:</p>
+                            <p class="comment-content">Para principiantes, te recomendaría el curso "Fundamentos de Defensa Personal".  Cubre lo básico y es un excelente punto de partida. ¡Te esperamos!</p>
+                        </div>
+
+                        <div class="comment">
+                            <p class="comment-author">UsuarioExperto:</p>
+                            <p class="comment-content">Yo empecé con "Defensa Personal Nivel 1" y me fue genial.  Los instructores son muy pacientes y explican todo muy bien.</p>
+                        </div>
+
+                        <div class="comment-form">
+                            <h5>Deja tu comentario:</h5>
+                            <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+                            <button type="button">Publicar Comentario (Simulado)</button>
+                        </div>
+                    </section>
+
+                </div>
+
+                <div class="forum-post">
+                    <h3 class="post-title">Review del curso "Combate Urbano Avanzado"</h3>
+                    <p class="post-author">Publicado por: <span class="fw-bold">ExpertoEnTiro</span></p>
+                    <p class="post-content">
+                        Recientemente completé el curso de "Combate Urbano Avanzado" y quería compartir mi experiencia.  ¡Simplemente increíble!  La intensidad del entrenamiento y la profesionalidad de los instructores es de otro nivel.  Si buscas un curso exigente y de alta calidad, este es el indicado.  Recomendado al 100%.
+
+                        <div class="post-images">
+                            <img src="https://images.pexels.com/photos/4773022/pexels-photo-4773022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen del curso 1" class="post-image">
+                            <img src="https://images.pexels.com/photos/4773019/pexels-photo-4773019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen del curso 2" class="post-image">
+                        </div>
+                    </p>
+                    <div class="post-footer">
+                        <span class="post-date">Publicado: 10 de Marzo, 2025</span>
+                        <div class="post-actions">
+                            <a href="#"><i class="bi bi-reply-fill"></i> Responder</a>
+                            <a href="#"><i class="bi bi-heart-fill"></i> Me gusta</a>
+                        </div>
+                    </div>
+
+                    <section class="post-comments-section">
+                        <h4>Comentarios:</h4>
+
+                        <div class="comment">
+                            <p class="comment-author">FanDeSparta:</p>
+                            <p class="comment-content">Totalmente de acuerdo!  "Combate Urbano Avanzado" es el mejor curso que he tomado en SPARTA I.A.T.  ¡Súper recomendado para quienes buscan un desafío!</p>
+                        </div>
+
+                        <div class="comment-form">
+                            <h5>Deja tu comentario:</h5>
+                            <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+                            <button type="button">Publicar Comentario (Simulado)</button>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="forum-post">
+                    <h3 class="post-title">Consulta sobre certificaciones RENAR</h3>
+                    <p class="post-author">Publicado por: <span class="fw-bold">PreguntónSeguro</span></p>
+                    <p class="post-content">
+                        Hola, tengo una consulta sobre las certificaciones RENAR que ofrecen en algunos cursos.  ¿Alguien sabe si la certificación de "Tiro Defensivo Avanzado" es válida para la renovación de la CLU?  Gracias por la info!
+                    </p>
+                    <div class="post-footer">
+                        <span class="post-date">Publicado: 5 de Marzo, 2025</span>
+                        <div class="post-actions">
+                            <a href="#"><i class="bi bi-reply-fill"></i> Responder</a>
+                            <a href="#"><i class="bi bi-heart-fill"></i> Me gusta</a>
+                        </div>
+                    </div>
+                     <section class="post-comments-section">
+                        <h4>Comentarios:</h4>
+
+                        <div class="comment">
+                            <p class="comment-author">InfoLegal:</p>
+                            <p class="comment-content">Hola!  Sí, la certificación de "Tiro Defensivo Avanzado" es válida para la renovación de la CLU según la normativa vigente del RENAR.  Te recomiendo consultar directamente con ellos para confirmación y detalles específicos.</p>
+                        </div>
+
+                        <div class="comment-form">
+                            <h5>Deja tu comentario:</h5>
+                            <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+                            <button type="button">Publicar Comentario (Simulado)</button>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="forum-post">
+                    <h3 class="post-title">Consejos para principiantes en tiro deportivo</h3>
+                    <p class="post-author">Publicado por: <span class="fw-bold">TiradorNovato</span></p>
+                    <p class="post-content">
+                        Recién me inscribí en el curso de "Tiro Deportivo" y estoy un poco nervioso.  ¿Algún consejo para los que recién empezamos en esta disciplina?  Cualquier tip es bienvenido!
+
+                        <div class="post-images">
+                            <img src="https://images.pexels.com/photos/998430/pexels-photo-998430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen de tiro deportivo 1" class="post-image">
+                            <img src="https://images.pexels.com/photos/998428/pexels-photo-998428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen de tiro deportivo 2" class="post-image">
+                            <img src="https://images.pexels.com/photos/998429/pexels-photo-998429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Imagen de tiro deportivo 3" class="post-image">
+                        </div>
+                    </p>
+                    <div class="post-footer">
+                        <span class="post-date">Publicado: 1 de Marzo, 2025</span>
+                        <div class="post-actions">
+                            <a href="#"><i class="bi bi-reply-fill"></i> Responder</a>
+                            <a href="#"><i class="bi bi-heart-fill"></i> Me gusta</a>
+                        </div>
+                    </div>
+                     <section class="post-comments-section">
+                        <h4>Comentarios:</h4>
+
+                        <div class="comment">
+                            <p class="comment-author">TiroTipsPro:</p>
+                            <p class="comment-content">Relájate y concéntrate en lo básico: postura, agarre, respiración y control del gatillo.  La práctica constante es clave! ¡Disfruta el proceso!</p>
+                        </div>
+
+                        <div class="comment-form">
+                            <h5>Deja tu comentario:</h5>
+                            <textarea placeholder="Escribe tu comentario aquí..."></textarea>
+                            <button type="button">Publicar Comentario (Simulado)</button>
+                        </div>
+                    </section>
+                </div>
+
+
+            </section>
+
+            <aside class="forum-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Publicaciones Populares Recientes</h3>
+                    <ul class="sidebar-list">
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Review del curso "Combate Urbano Avanzado"</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Consulta sobre certificaciones Anmac</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Consejos para principiantes en tiro deportivo</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Mejor pistola para defensa personal en Argentina</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Equipamiento táctico esencial para empezar</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Temas Populares</h3>
+                    <ul class="sidebar-list">
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Defensa Personal</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Tiro Deportivo</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Legislación Argentina</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Equipamiento Táctico</a>
+                        </li>
+                        <li class="sidebar-list-item">
+                            <a href="#" class="sidebar-list-link">Primeros Auxilios</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Tiro Defensivo - Sparta Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --verde-militar: #556B2F;
+            --gris-oscuro: #0D0D0D;
+            --blanco: #FFFFFF;
+            --sombra: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        body {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .curso-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                       url('https://images.pexels.com/photos/7095521/pexels-photo-7095521.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 4rem 0;
+            border-bottom: 3px solid var(--verde-militar);
+        }
+        
+        .bloqueo-overlay {
+            position: relative;
+        }
+        
+        .bloqueo-overlay::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1;
+        }
+        
+        .btn-comprar {
+            background: var(--verde-militar);
+            color: var(--blanco);
+            padding: 1rem 2rem;
+            border: 2px solid var(--blanco);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-comprar:hover {
+            background: #6B8E23;
+            transform: scale(1.05);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--verde-militar);
+        }
+        
+        .recurso-card {
+            background: var(--gris-oscuro);
+            border: 2px solid var(--verde-militar);
+            transition: transform 0.3s ease;
+        }
+        
+        .recurso-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .bloqueado {
+            filter: grayscale(1);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+  <!-- Navbar Mejorado -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-sparta fixed-top">
+    <style height: 100px;> </style>
+    <div class="container-fluid">
+        <a class="navbar-brand navbar-brand-sparta d-flex align-items-center" href="#">
+            <img src="" alt="Sparta Academy">
+            <span class="d-none d-md-block">Sparta I.A.T</span>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-sparta active" href="app.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-sparta" href="cursos.html">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-sparta" href="foro.html">Foro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-sparta" href="perfil.html">Perfil</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Header del Curso -->
+    <header class="curso-header">
+        <div class="container text-center position-relative">
+            <h1 class="display-4 mb-3">Tiro Defensivo Avanzado</h1>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <span class="badge bg-verde-militar">40 horas</span>
+                <span class="badge bg-verde-militar">Certificación RENAR</span>
+                <span class="badge bg-verde-militar">Nivel Avanzado</span>
+            </div>
+            <button id="btnCompra" class="btn btn-comprar">
+                <i class="bi bi-lock-fill me-2"></i>Desbloquear Curso - $24.999
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenido del Curso -->
+    <main class="container py-5">
+        <!-- Sección de Video -->
+        <section class="bloqueo-overlay mb-5" id="seccionVideo">
+            <div class="video-container">
+                <iframe src="videoplayback.mp4" 
+                        frameborder="0" 
+                        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Recursos del Curso -->
+        <section class="row g-4" id="seccionRecursos">
+            <!-- PDF 1 -->
+            <div class="col-md-4 bloqueado">
+                <div class="recurso-card p-4 text-center">
+                    <i class="bi bi-file-pdf fs-1 text-danger mb-3"></i>
+                    <h4>Manual de Seguridad</h4>
+                    <p class="text-muted">PDF - 45 páginas</p>
+                    <button class="btn btn-outline-verde-militar w-100" disabled>
+                        <i class="bi bi-download me-2"></i>Descargar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- PDF 2 -->
+            <div class="col-md-4 bloqueado">
+                <div class="recurso-card p-4 text-center">
+                    <i class="bi bi-file-pdf fs-1 text-danger mb-3"></i>
+                    <h4>Técnicas Avanzadas</h4>
+                    <p class="text-muted">PDF - 32 páginas</p>
+                    <button class="btn btn-outline-verde-militar w-100" disabled>
+                        <i class="bi bi-download me-2"></i>Descargar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- PDF 3 -->
+            <div class="col-md-4 bloqueado">
+                <div class="recurso-card p-4 text-center">
+                    <i class="bi bi-file-pdf fs-1 text-danger mb-3"></i>
+                    <h4>Ejercicios Prácticos</h4>
+                    <p class="text-muted">PDF - 28 páginas</p>
+                    <button class="btn btn-outline-verde-militar w-100" disabled>
+                        <i class="bi bi-download me-2"></i>Descargar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Módulos del Curso -->
+        <section class="mt-5" id="seccionModulos">
+            <h3 class="mb-4 border-bottom pb-2">Módulos del Curso</h3>
+            <div class="list-group">
+                <div class="list-group-item bg-gris-oscuro text-blanco bloqueado">
+                    <div class="d-flex justify-content-between">
+                        <span>1. Fundamentos de Seguridad</span>
+                        <i class="bi bi-lock"></i>
+                    </div>
+                    <small class="text-muted">Duración: 2h 15min</small>
+                </div>
+                <!-- Repetir más módulos -->
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnCompra = document.getElementById('btnCompra');
+            const elementosBloqueados = document.querySelectorAll('.bloqueado');
+            const seccionVideo = document.getElementById('seccionVideo');
+
+            btnCompra.addEventListener('click', function() {
+                // Simular proceso de compra
+                this.innerHTML = '<i class="bi bi-unlock-fill me-2"></i>Curso Desbloqueado';
+                this.classList.remove('btn-comprar');
+                this.classList.add('btn-success');
+                this.disabled = true;
+                
+                // Quitar overlay de bloqueo
+                seccionVideo.classList.remove('bloqueo-overlay');
+                
+                // Habilitar recursos
+                elementosBloqueados.forEach(elemento => {
+                    elemento.classList.remove('bloqueado');
+                    elemento.querySelector('button').disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
